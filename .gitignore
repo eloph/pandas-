@@ -1,0 +1,7 @@
+# 忽略文件和目录
+node_modules/
+.DS_Store
+*.log
+.env
+.git/
+.trae/

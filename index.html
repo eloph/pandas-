@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pandas Playground - 交互式学习平台</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container navbar-container">
+      <a href="index.html" class="navbar-logo">
+        🐼 Pandas Playground
+      </a>
+      <ul class="navbar-menu">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="learn.html">学习</a></li>
+        <li><a href="challenges.html">挑战</a></li>
+        <li><a href="explore.html">探索</a></li>
+      </ul>
+      <button class="theme-toggle" title="切换主题">🌙</button>
+      <button class="navbar-toggle" title="菜单">☰</button>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <section class="hero">
+    <div class="container">
+      <h1>欢迎来到 Pandas Playground</h1>
+      <p>交互式学习平台，让 Pandas 数据分析变得简单有趣！</p>
+      <div class="hero-buttons">
+        <a href="learn.html" class="btn btn-primary">开始学习</a>
+        <a href="challenges.html" class="btn btn-secondary">挑战练习</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 学习进度 -->
+  <section class="container">
+    <div class="card">
+      <h2>学习进度</h2>
+      <div class="progress-info">
+        <div class="progress-item">
+          <span class="progress-label">学习天数</span>
+          <span class="progress-value learning-days">0</span>
+        </div>
+        <div class="progress-item">
+          <span class="progress-label">积分</span>
+          <span class="progress-value points">0</span>
+        </div>
+        <div class="progress-item">
+          <span class="progress-label">已完成模块</span>
+          <span class="progress-value completed-modules">0/10</span>
+        </div>
+      </div>
+      <div class="progress-container">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 学习路径 -->
+  <section class="container learning-path">
+    <h2>学习路径</h2>
+    <div class="path-timeline">
+      <div class="path-item completed">
+        <div class="path-content">
+          <h3>基础操作</h3>
+          <p>学习 Pandas 的基本数据结构和操作</p>
+        </div>
+        <div class="path-dot"></div>
+      </div>
+      <div class="path-item">
+        <div class="path-content">
+          <h3>数据筛选</h3>
+          <p>掌握数据筛选和条件查询</p>
+        </div>
+        <div class="path-dot"></div>
+      </div>
+      <div class="path-item">
+        <div class="path-content">
+          <h3>数据分组</h3>
+          <p>学习数据分组和聚合操作</p>
+        </div>
+        <div class="path-dot"></div>
+      </div>
+      <div class="path-item">
+        <div class="path-content">
+          <h3>数据合并</h3>
+          <p>掌握数据合并和连接操作</p>
+        </div>
+        <div class="path-dot"></div>
+      </div>
+      <div class="path-item">
+        <div class="path-content">
+          <h3>数据透视表</h3>
+          <p>学习创建和使用数据透视表</p>
+        </div>
+        <div class="path-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 推荐练习 -->
+  <section class="container">
+    <h2>今日推荐练习</h2>
+    <div class="challenges-list">
+      <div class="challenge-card">
+        <div class="challenge-header">
+          <h3 class="challenge-title">基础数据筛选</h3>
+          <span class="challenge-difficulty difficulty-easy">初级</span>
+        </div>
+        <p class="challenge-description">从销售数据中筛选出销售额大于1500的记录</p>
+        <a href="challenges.html" class="btn btn-primary">开始挑战</a>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-header">
+          <h3 class="challenge-title">数据分组聚合</h3>
+          <span class="challenge-difficulty difficulty-medium">中级</span>
+        </div>
+        <p class="challenge-description">按产品分组，计算每个产品的销售总额和平均销售额</p>
+        <a href="challenges.html" class="btn btn-primary">开始挑战</a>
+      </div>
+      <div class="challenge-card">
+        <div class="challenge-header">
+          <h3 class="challenge-title">数据排序</h3>
+          <span class="challenge-difficulty difficulty-easy">初级</span>
+        </div>
+        <p class="challenge-description">按销售额降序排序，显示前3条记录</p>
+        <a href="challenges.html" class="btn btn-primary">开始挑战</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热门代码示例 -->
+  <section class="container">
+    <h2>热门代码示例</h2>
+    <div class="examples-list">
+      <div class="example-item">
+        <h3 class="example-title">读取CSV文件</h3>
+        <pre class="example-code">import pandas as pd
+
+# 读取CSV文件
+df = pd.read_csv('sales.csv')
+
+# 查看数据
+df.head()</pre>
+        <a href="learn.html" class="btn btn-primary">查看详情</a>
+      </div>
+      <div class="example-item">
+        <h3 class="example-title">布尔索引筛选</h3>
+        <pre class="example-code">import pandas as pd
+
+df = pd.read_csv('sales.csv')
+
+# 筛选销售额大于1000的数据
+filtered_df = df[df['销售额'] > 1000]
+
+print(filtered_df)</pre>
+        <a href="learn.html" class="btn btn-primary">查看详情</a>
+      </div>
+      <div class="example-item">
+        <h3 class="example-title">按产品分组聚合</h3>
+        <pre class="example-code">import pandas as pd
+
+df = pd.read_csv('sales.csv')
+
+# 按产品分组，计算销售总额和平均销售额
+grouped_df = df.groupby('产品').agg({
+    '销售额': ['sum', 'mean'],
+    '数量': 'sum'
+})
+
+print(grouped_df)</pre>
+        <a href="learn.html" class="btn btn-primary">查看详情</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="container" style="margin-top: 40px; padding: 20px 0; text-align: center; border-top: 1px solid #e5e7eb;">
+    <p>&copy; 2026 Pandas Playground - 交互式学习平台</p>
+  </footer>
+
+  <!-- 脚本 -->
+  <script src="js/main.js"></script>
+</body>
+</html>
