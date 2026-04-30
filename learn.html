@@ -6,16 +6,16 @@
   <title>学习 - Pandas Playground</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/themes.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
 </head>
 <body>
-  <!-- 导航栏 -->
   <nav class="navbar">
     <div class="container navbar-container">
       <a href="index.html" class="navbar-logo">
-        🐼 Pandas Playground
+        <span class="panda-icon">🐼</span>
+        <span>Pandas Playground</span>
       </a>
       <ul class="navbar-menu">
         <li><a href="index.html">首页</a></li>
@@ -28,131 +28,233 @@
     </div>
   </nav>
 
-  <!-- 主内容 -->
-  <div class="container" style="display: grid; grid-template-columns: 1fr 300px; gap: 20px; margin-top: 20px;">
-    <!-- 左侧内容 -->
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div class="stat-value">12</div>
+        <div class="stat-label">代码示例</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-value">10</div>
+        <div class="stat-label">学习模块</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-value">5</div>
+        <div class="stat-label">数据集</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🚀</div>
+        <div class="stat-value">Pyodide</div>
+        <div class="stat-label">实时运行</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="display: grid; grid-template-columns: 1fr 320px; gap: 30px; margin-top: 30px;">
     <div class="left-content">
-      <!-- 数据集选择 -->
-      <section class="datasets-container">
-        <h2>选择数据集</h2>
-        <div class="datasets-grid">
-          <!-- 数据集卡片将通过 JavaScript 动态生成 -->
+      <section class="card">
+        <h2>📚 学习模块</h2>
+        <div class="module-grid">
+          <div class="module-card" onclick="loadModule('basics')">
+            <div class="module-icon">📖</div>
+            <h3 class="module-title">基础操作</h3>
+            <p class="module-description">学习 Pandas 的基本数据结构和创建 DataFrame</p>
+          </div>
+          <div class="module-card" onclick="loadModule('filtering')">
+            <div class="module-icon">🔍</div>
+            <h3 class="module-title">数据筛选</h3>
+            <p class="module-description">布尔索引、条件查询、数据过滤技巧</p>
+          </div>
+          <div class="module-card" onclick="loadModule('grouping')">
+            <div class="module-icon">📦</div>
+            <h3 class="module-title">数据分组</h3>
+            <p class="module-description">groupby 聚合、分组统计、数据汇总</p>
+          </div>
+          <div class="module-card" onclick="loadModule('merging')">
+            <div class="module-icon">🔗</div>
+            <h3 class="module-title">数据合并</h3>
+            <p class="module-description">merge、concat、join 合并数据</p>
+          </div>
+          <div class="module-card" onclick="loadModule('pivoting')">
+            <div class="module-icon">📊</div>
+            <h3 class="module-title">数据透视表</h3>
+            <p class="module-description">pivot_table 创建数据透视表</p>
+          </div>
+          <div class="module-card" onclick="loadModule('cleaning')">
+            <div class="module-icon">🧹</div>
+            <h3 class="module-title">数据清洗</h3>
+            <p class="module-description">缺失值处理、重复值删除、数据类型转换</p>
+          </div>
+          <div class="module-card" onclick="loadModule('sorting')">
+            <div class="module-icon">📈</div>
+            <h3 class="module-title">数据排序</h3>
+            <p class="module-description">sort_values、sort_index 排序操作</p>
+          </div>
+          <div class="module-card" onclick="loadModule('visualization')">
+            <div class="module-icon">📉</div>
+            <h3 class="module-title">数据可视化</h3>
+            <p class="module-description">plot、图表绘制、数据展示</p>
+          </div>
+          <div class="module-card" onclick="loadModule('statistics')">
+            <div class="module-icon">🔢</div>
+            <h3 class="module-title">统计描述</h3>
+            <p class="module-description">describe、统计函数、数据分析</p>
+          </div>
+          <div class="module-card" onclick="loadModule('advanced')">
+            <div class="module-icon">⚡</div>
+            <h3 class="module-title">高级操作</h3>
+            <p class="module-description">apply、transform、lambda 函数</p>
+          </div>
         </div>
       </section>
 
-      <!-- 代码编辑器 -->
+      <section class="datasets-container">
+        <h2 style="color: var(--neon-cyan); margin-bottom: 20px;">📁 选择数据集</h2>
+        <div class="datasets-grid">
+          <div class="dataset-card active" onclick="setCurrentDataset('sales')">
+            <h3 class="dataset-name">📊 销售数据</h3>
+            <p class="dataset-description">包含日期、产品、销售额、数量等字段</p>
+            <div class="dataset-fields">字段: 日期, 产品, 销售额, 数量</div>
+          </div>
+          <div class="dataset-card" onclick="setCurrentDataset('students')">
+            <h3 class="dataset-name">🎓 学生成绩</h3>
+            <p class="dataset-description">包含学生ID、姓名、科目、成绩等字段</p>
+            <div class="dataset-fields">字段: 学生ID, 姓名, 科目, 成绩</div>
+          </div>
+          <div class="dataset-card" onclick="setCurrentDataset('weather')">
+            <h3 class="dataset-name">🌤️ 天气数据</h3>
+            <p class="dataset-description">包含日期、温度、湿度、风速等字段</p>
+            <div class="dataset-fields">字段: 日期, 温度, 湿度, 风速</div>
+          </div>
+          <div class="dataset-card" onclick="setCurrentDataset('movies')">
+            <h3 class="dataset-name">🎬 电影评分</h3>
+            <p class="dataset-description">包含电影ID、名称、评分、评论数等字段</p>
+            <div class="dataset-fields">字段: 电影ID, 名称, 评分, 评论数</div>
+          </div>
+          <div class="dataset-card" onclick="setCurrentDataset('employees')">
+            <h3 class="dataset-name">👥 员工信息</h3>
+            <p class="dataset-description">包含员工ID、姓名、部门、薪资等字段</p>
+            <div class="dataset-fields">字段: 员工ID, 姓名, 部门, 薪资</div>
+          </div>
+        </div>
+      </section>
+
       <section class="editor-container">
         <div class="editor-header">
-          <h3 class="editor-title">代码编辑器</h3>
+          <h3 class="editor-title">💻 代码编辑器</h3>
           <div class="editor-actions">
-            <button class="btn btn-primary run-button">运行代码</button>
-            <button class="btn btn-secondary save-button">保存代码</button>
+            <button class="btn btn-primary run-button">▶️ 运行代码</button>
+            <button class="btn btn-secondary save-button">💾 保存</button>
+            <button class="btn btn-outline" onclick="clearEditor()">🗑️ 清空</button>
           </div>
         </div>
         <div id="editor"></div>
         <div class="editor-output"></div>
       </section>
 
-      <!-- 代码示例库 -->
       <section class="examples-container">
-        <h2>代码示例库</h2>
+        <h2 style="color: var(--neon-orange); margin-bottom: 20px;">💡 代码示例库</h2>
         <div class="examples-tabs">
-          <!-- 示例分类标签将通过 JavaScript 动态生成 -->
+          <button class="example-tab active" onclick="filterExamples('basics')">基础操作</button>
+          <button class="example-tab" onclick="filterExamples('filtering')">数据筛选</button>
+          <button class="example-tab" onclick="filterExamples('grouping')">数据分组</button>
+          <button class="example-tab" onclick="filterExamples('merging')">数据合并</button>
+          <button class="example-tab" onclick="filterExamples('cleaning')">数据清洗</button>
+          <button class="example-tab" onclick="filterExamples('visualization')">数据可视化</button>
         </div>
-        <div class="examples-list">
-          <!-- 代码示例将通过 JavaScript 动态生成 -->
+        <div class="examples-list" id="examples-list"></div>
+      </section>
+
+      <section class="card">
+        <h2>⭐ 我的收藏</h2>
+        <div id="favorites-container">
+          <p style="color: var(--text-secondary);">暂无收藏的代码片段</p>
         </div>
       </section>
     </div>
 
-    <!-- 右侧边栏 -->
     <div class="right-sidebar">
-      <!-- 函数速查表 -->
+      <div class="panda-assistant" onclick="showPandaTip()">🐼</div>
+
       <div class="cheatsheet-container">
-        <h3 class="cheatsheet-title">函数速查表</h3>
+        <h3 class="cheatsheet-title">📋 函数速查表</h3>
+        
         <div class="cheatsheet-category">
-          <div class="cheatsheet-category-title" onclick="toggleCategory('basics')">
-            基础操作
-            <span>▼</span>
-          </div>
-          <ul class="cheatsheet-functions" id="basics">
+          <div class="cheatsheet-category-title" onclick="toggleCategory('basics')">基础操作 <span>▼</span></div>
+          <ul class="cheatsheet-functions expanded" id="basics-func">
             <li class="cheatsheet-function" onclick="insertCode('df.head()')">head() - 查看前几行</li>
             <li class="cheatsheet-function" onclick="insertCode('df.tail()')">tail() - 查看后几行</li>
-            <li class="cheatsheet-function" onclick="insertCode('df.info()')">info() - 查看数据信息</li>
+            <li class="cheatsheet-function" onclick="insertCode('df.info()')">info() - 数据信息</li>
             <li class="cheatsheet-function" onclick="insertCode('df.describe()')">describe() - 统计描述</li>
           </ul>
         </div>
+
         <div class="cheatsheet-category">
-          <div class="cheatsheet-category-title" onclick="toggleCategory('filtering')">
-            数据筛选
-            <span>▼</span>
-          </div>
-          <ul class="cheatsheet-functions" id="filtering">
+          <div class="cheatsheet-category-title" onclick="toggleCategory('filtering')">数据筛选 <span>▼</span></div>
+          <ul class="cheatsheet-functions" id="filtering-func">
             <li class="cheatsheet-function" onclick="insertCode('df[df[\"列名\"] > 值]')">布尔索引</li>
             <li class="cheatsheet-function" onclick="insertCode('df.loc[条件]')">loc[] - 标签索引</li>
             <li class="cheatsheet-function" onclick="insertCode('df.iloc[位置]')">iloc[] - 位置索引</li>
           </ul>
         </div>
+
         <div class="cheatsheet-category">
-          <div class="cheatsheet-category-title" onclick="toggleCategory('grouping')">
-            数据分组
-            <span>▼</span>
-          </div>
-          <ul class="cheatsheet-functions" id="grouping">
+          <div class="cheatsheet-category-title" onclick="toggleCategory('grouping')">数据分组 <span>▼</span></div>
+          <ul class="cheatsheet-functions" id="grouping-func">
             <li class="cheatsheet-function" onclick="insertCode('df.groupby(\"列名\")')">groupby() - 分组</li>
             <li class="cheatsheet-function" onclick="insertCode('df.groupby(\"列名\").agg({})')">agg() - 聚合</li>
+            <li class="cheatsheet-function" onclick="insertCode('df.groupby(\"列名\").sum()')">sum() - 求和</li>
           </ul>
         </div>
+
         <div class="cheatsheet-category">
-          <div class="cheatsheet-category-title" onclick="toggleCategory('merging')">
-            数据合并
-            <span>▼</span>
-          </div>
-          <ul class="cheatsheet-functions" id="merging">
+          <div class="cheatsheet-category-title" onclick="toggleCategory('merging')">数据合并 <span>▼</span></div>
+          <ul class="cheatsheet-functions" id="merging-func">
             <li class="cheatsheet-function" onclick="insertCode('pd.merge(df1, df2, on=\"列名\")')">merge() - 合并</li>
             <li class="cheatsheet-function" onclick="insertCode('pd.concat([df1, df2])')">concat() - 连接</li>
           </ul>
         </div>
+
         <div class="cheatsheet-category">
-          <div class="cheatsheet-category-title" onclick="toggleCategory('cleaning')">
-            数据清洗
-            <span>▼</span>
-          </div>
-          <ul class="cheatsheet-functions" id="cleaning">
-            <li class="cheatsheet-function" onclick="insertCode('df.dropna()')">dropna() - 删除缺失值</li>
-            <li class="cheatsheet-function" onclick="insertCode('df.fillna(值)')">fillna() - 填充缺失值</li>
-            <li class="cheatsheet-function" onclick="insertCode('df.drop_duplicates()')">drop_duplicates() - 删除重复值</li>
+          <div class="cheatsheet-category-title" onclick="toggleCategory('cleaning')">数据清洗 <span>▼</span></div>
+          <ul class="cheatsheet-functions" id="cleaning-func">
+            <li class="cheatsheet-function" onclick="insertCode('df.dropna()')">dropna() - 删除缺失</li>
+            <li class="cheatsheet-function" onclick="insertCode('df.fillna(值)')">fillna() - 填充缺失</li>
+            <li class="cheatsheet-function" onclick="insertCode('df.drop_duplicates()')">drop_duplicates()</li>
           </ul>
         </div>
+
         <div class="cheatsheet-category">
-          <div class="cheatsheet-category-title" onclick="toggleCategory('sorting')">
-            数据排序
-            <span>▼</span>
-          </div>
-          <ul class="cheatsheet-functions" id="sorting">
-            <li class="cheatsheet-function" onclick="insertCode('df.sort_values(\"列名\")')">sort_values() - 排序</li>
-            <li class="cheatsheet-function" onclick="insertCode('df.sort_index()')">sort_index() - 按索引排序</li>
+          <div class="cheatsheet-category-title" onclick="toggleCategory('sorting')">数据排序 <span>▼</span></div>
+          <ul class="cheatsheet-functions" id="sorting-func">
+            <li class="cheatsheet-function" onclick="insertCode('df.sort_values(\"列名\")')">sort_values()</li>
+            <li class="cheatsheet-function" onclick="insertCode('df.sort_index()')">sort_index()</li>
           </ul>
         </div>
+
         <div class="cheatsheet-category">
-          <div class="cheatsheet-category-title" onclick="toggleCategory('pivoting')">
-            数据透视表
-            <span>▼</span>
-          </div>
-          <ul class="cheatsheet-functions" id="pivoting">
-            <li class="cheatsheet-function" onclick="insertCode('pd.pivot_table(df, values=\"值列\", index=\"行索引\", columns=\"列索引\", aggfunc=\"sum\")')">pivot_table() - 透视表</li>
+          <div class="cheatsheet-category-title" onclick="toggleCategory('advanced')">高级操作 <span>▼</span></div>
+          <ul class="cheatsheet-functions" id="advanced-func">
+            <li class="cheatsheet-function" onclick="insertCode('df[\"新列\"] = df[\"列\"].apply(函数)')">apply() - 应用函数</li>
+            <li class="cheatsheet-function" onclick="insertCode('df.assign(新列=值)')">assign() - 新增列</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 页脚 -->
-  <footer class="container" style="margin-top: 40px; padding: 20px 0; text-align: center; border-top: 1px solid #e5e7eb;">
-    <p>&copy; 2026 Pandas Playground - 交互式学习平台</p>
+  <footer class="container" style="margin-top: 60px; padding: 30px 0; text-align: center; border-top: 2px solid var(--neon-cyan);">
+    <p style="color: var(--text-secondary);">
+      © 2026 Pandas Playground - 交互式学习平台 | 
+      <span style="color: var(--neon-pink);">🐼</span> 
+      使用 Pyodide 在浏览器中运行真实 Python 代码
+    </p>
   </footer>
 
-  <!-- 脚本 -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
   <script src="js/main.js"></script>
@@ -160,11 +262,261 @@
   <script src="js/datasets.js"></script>
   <script src="js/examples.js"></script>
   <script>
-    // 切换函数分类
     function toggleCategory(categoryId) {
       const category = document.getElementById(categoryId);
-      category.classList.toggle('expanded');
+      if (category) category.classList.toggle('expanded');
     }
+
+    function clearEditor() {
+      if (editor) {
+        editor.setValue(`# 在这里编写你的 Pandas 代码
+
+import pandas as pd
+import numpy as np
+
+# 创建数据
+data = {
+    "产品": ["产品A", "产品B", "产品C"],
+    "销售额": [1200, 1800, 1500],
+    "数量": [12, 18, 15]
+}
+
+df = pd.DataFrame(data)
+print("数据预览:")
+print(df)`);
+      }
+    }
+
+    function showPandaTip() {
+      const tips = [
+        '💡 提示：使用 Ctrl+Enter 可以快速运行代码！',
+        '🐼 试试点击不同的数据集加载示例数据！',
+        '📋 查看右侧的函数速查表快速插入代码！',
+        '⭐ 别忘了收藏你喜欢的代码片段！',
+        '🎯 完成挑战可以获得徽章奖励！'
+      ];
+      alert(tips[Math.floor(Math.random() * tips.length)]);
+    }
+
+    function loadModule(moduleName) {
+      const moduleCodes = {
+        basics: `import pandas as pd
+
+# 创建数据
+data = {
+    "姓名": ["张三", "李四", "王五", "赵六"],
+    "年龄": [25, 30, 28, 35],
+    "城市": ["北京", "上海", "广州", "深圳"]
+}
+
+# 创建 DataFrame
+df = pd.DataFrame(data)
+
+print("📊 DataFrame 基础操作:")
+print(df)
+print("\\n📋 数据信息:")
+print(df.info())
+print("\\n📈 统计描述:")
+print(df.describe())`,
+        filtering: `import pandas as pd
+
+data = {
+    "产品": ["A", "B", "C", "D", "E"],
+    "销售额": [1200, 1800, 1500, 2100, 900],
+    "数量": [12, 18, 15, 21, 9]
+}
+df = pd.DataFrame(data)
+
+print("原始数据:")
+print(df)
+
+print("\\n🔍 筛选销售额 > 1500 的产品:")
+filtered = df[df["销售额"] > 1500]
+print(filtered)`,
+        grouping: `import pandas as pd
+
+data = {
+    "部门": ["技术", "市场", "技术", "市场", "技术"],
+    "员工": ["张三", "李四", "王五", "赵六", "孙七"],
+    "薪资": [10000, 8000, 12000, 8500, 11000]
+}
+df = pd.DataFrame(data)
+
+print("原始数据:")
+print(df)
+
+print("\\n📦 按部门分组统计薪资:")
+grouped = df.groupby("部门").agg({"薪资": ["sum", "mean", "count"]})
+print(grouped)`,
+        merging: `import pandas as pd
+
+df1 = pd.DataFrame({
+    "产品": ["A", "B", "C"],
+    "销售额": [1200, 1800, 1500]
+})
+
+df2 = pd.DataFrame({
+    "产品": ["A", "B", "C"],
+    "成本": [800, 1200, 1000]
+})
+
+print("数据表 1:")
+print(df1)
+print("\\n数据表 2:")
+print(df2)
+
+print("\\n🔗 合并数据:")
+merged = pd.merge(df1, df2, on="产品")
+print(merged)`,
+        cleaning: `import pandas as pd
+import numpy as np
+
+data = {
+    "产品": ["A", "B", "C", "D"],
+    "销售额": [1200, np.nan, 1500, 2100],
+    "数量": [12, 18, np.nan, 21]
+}
+df = pd.DataFrame(data)
+
+print("包含缺失值的数据:")
+print(df)
+
+print("\\n🧹 删除缺失值:")
+print(df.dropna())
+
+print("\\n🧹 填充缺失值为 0:")
+print(df.fillna(0))`,
+        visualization: `import pandas as pd
+
+data = {
+    "月份": ["1月", "2月", "3月", "4月", "5月"],
+    "销售额": [1200, 1800, 1500, 2100, 1900]
+}
+df = pd.DataFrame(data)
+
+print("📊 数据:")
+print(df)
+
+print("\\n📈 基本统计:")
+print(df["销售额"].describe())`,
+        sorting: `import pandas as pd
+
+data = {
+    "产品": ["A", "B", "C", "D", "E"],
+    "销售额": [1200, 1800, 1500, 2100, 900]
+}
+df = pd.DataFrame(data)
+
+print("原始数据:")
+print(df)
+
+print("\\n📈 按销售额升序排序:")
+sorted_df = df.sort_values("销售额")
+print(sorted_df)
+
+print("\\n📉 按销售额降序排序:")
+sorted_df2 = df.sort_values("销售额", ascending=False)
+print(sorted_df2)`,
+        statistics: `import pandas as pd
+
+data = {
+    "产品": ["A", "B", "C", "D", "E"],
+    "销售额": [1200, 1800, 1500, 2100, 900],
+    "数量": [12, 18, 15, 21, 9]
+}
+df = pd.DataFrame(data)
+
+print("📊 统计描述:")
+print(df.describe())
+
+print("\\n📈 各列统计:")
+print(f"总和: {df['销售额'].sum()}")
+print(f"均值: {df['销售额'].mean():.2f}")
+print(f"最大值: {df['销售额'].max()}")
+print(f"最小值: {df['销售额'].min()}")`,
+        advanced: `import pandas as pd
+
+data = {
+    "姓名": ["张三", "李四", "王五", "赵六"],
+    "薪资": [10000, 8000, 12000, 9000]
+}
+df = pd.DataFrame(data)
+
+print("原始数据:")
+print(df)
+
+# 使用 apply 新增列
+df["税后薪资"] = df["薪资"].apply(lambda x: x * 0.8)
+
+# 使用 assign 新增列
+df = df.assign(等级=df["薪资"].apply(lambda x: "高" if x > 10000 else "低"))
+
+print("\\n⚡ 高级操作后:")
+print(df)`,
+        pivoting: `import pandas as pd
+
+data = {
+    "日期": ["周一", "周二", "周三", "周四", "周五"],
+    "部门": ["技术", "技术", "市场", "市场", "技术"],
+    "销售额": [1200, 1800, 1500, 2100, 900]
+}
+df = pd.DataFrame(data)
+
+print("原始数据:")
+print(df)
+
+print("\\n📊 数据透视表:")
+pivot = pd.pivot_table(df, values="销售额", index="部门", aggfunc="sum")
+print(pivot)`
+      };
+
+      if (editor && moduleCodes[moduleName]) {
+        editor.setValue(moduleCodes[moduleName]);
+        document.querySelector('.editor-container').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function loadFavorites() {
+      const favorites = JSON.parse(localStorage.getItem('pandasPlayground_favorites') || '[]');
+      const container = document.getElementById('favorites-container');
+      
+      if (favorites.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-secondary);">暂无收藏的代码片段</p>';
+      } else {
+        container.innerHTML = favorites.map(f => `
+          <div class="example-item" style="margin-bottom: 15px;">
+            <h4 class="example-title">${f.name}</h4>
+            <span class="favorite-tag">${f.category}</span>
+            <pre class="example-code">${f.code}</pre>
+            <button class="btn btn-small btn-outline" onclick="deleteFavorite('${f.id}')">🗑️ 删除</button>
+            <button class="btn btn-small btn-primary" onclick="loadFavorite('${f.id}')">📥 使用</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function deleteFavorite(id) {
+      let favorites = JSON.parse(localStorage.getItem('pandasPlayground_favorites') || '[]');
+      favorites = favorites.filter(f => f.id !== id);
+      localStorage.setItem('pandasPlayground_favorites', JSON.stringify(favorites));
+      loadFavorites();
+      alert('已删除收藏！');
+    }
+
+    function loadFavorite(id) {
+      const favorites = JSON.parse(localStorage.getItem('pandasPlayground_favorites') || '[]');
+      const favorite = favorites.find(f => f.id === id);
+      if (favorite && editor) {
+        editor.setValue(favorite.code);
+        alert('已加载收藏代码！');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      initEditor();
+      initExamples();
+      loadFavorites();
+    });
   </script>
 </body>
 </html>
